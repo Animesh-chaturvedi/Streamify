@@ -4,9 +4,143 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .custom-card {
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  
+  .icon-circle {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+    color: #4895F7;
+  }
+  
+  .card-title {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .card-value {
+    margin: 0;
+  }
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+
+.tabs-container {
+  height: 40vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .tabs-container {
+    height: 50vh;
+  }
+}
+
+.tab-chart-container {
+  height: 100%; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  /* padding: 1rem; */
+  box-sizing: border-box;
+}
+
+canvas {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.tab-chart-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.tab-chart-container canvas {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+
+
+
+/*table css */
+
+.transaction-table-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-light th {
+  background-color: #f8f9fc;
+  color: #6c757d;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  border-bottom: 2px solid #e0e6ed;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fc;
+}
+.table thead tr th {
+  color:#4895f7
+}
+
+th, td {
+  text-align: center; 
+  vertical-align: middle;
+}
+
+td.fw-bold {
+  color: #343a40; 
+  font-weight: bold;
+}
+
+.input-group-text {
+  background-color: #ffffff;
+  border: 1px solid #e0e6ed;
+}
+
+.form-control {
+  border: 1px solid #e0e6ed;
+}
+
+.form-control:focus {
+  border-color: #4895f7;
+  box-shadow: 0 0 0 0.2rem rgba(72, 149, 247, 0.25);
+}
+
+.btn-outline-secondary {
+  color: #4895f7;
+  border-color: #4895f7;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #4895f7;
+  color: #ffffff;
 }

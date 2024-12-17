@@ -1,42 +1,55 @@
-// src/mirageServer.js
-import { createServer, Model } from 'miragejs';
+import { createServer } from "miragejs";
 
-export function makeServer({ environment = "development" } = {}) {
-  let server = createServer({
-    environment,
-
-    models: {
-      card: Model,
-      chart:Model
-    },
-
-    seeds(server) {
-        server.create("card", { name: "totalUsers", value: 17800 });
-        server.create("card", { name: "activeUsers", value: 1898 });
-        server.create("card", { name: "totalStreams", value: 184501 });
-        server.create("card", { name: "Revenue", value: 32500 });
-        server.create("card", { name: "TopArtist", value: "Diljeet Dosanjh", imageUrl:'https://elle.in/wp-content/uploads/2024/04/AMAR-SINGH-CHAMKILA-A-FILM-BY-@imtiazaliofficial-@parineetichopra-@arrahman-@kamil_irshad_official-@mohitchauhanofficial-@netflix_in-@saregama_official-768x957.jpg' });
-        server.create("chart", {type:"line", chartData:{labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-          datasets: [{ label: 'Monthly Sales', data: [65, 59, 80, 81, 56, 55], fill: false, borderColor: 'rgb(75, 192, 192)', tension: 0.1 }]}})
-        server.create("chart", {type:"pie", chartData:{labels: ['Red', 'Blue', 'Yellow'],
-          datasets: [{ data: [300, 50, 100], backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'] }]}})
-        server.create("chart", { type:"bar", chartData: {labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-          datasets: [{ label: 'Quarterly Revenue', data: [200, 300, 400, 500], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)', borderWidth: 1 }]}})
-
-      },
-
+export function makeServer() {
+  createServer({
     routes() {
-      this.namespace = 'api';
+      this.namespace = "api";
 
-      this.get("/cards", (schema) => {
-        return schema.cards.all();
+      this.get("/metrics", () => ({
+        totalUsers: 50000,
+        activeUsers: 12000,
+        totalStreams: 350000,
+        revenue: 85000,
+        topArtist: "The Weekend",
+      }));
+
+      this.get("/user-growth", () => [
+        { month: "Jan", totalUsers: 10000, activeUsers: 2000 },
+        { month: "Feb", totalUsers: 15000, activeUsers: 4000 },
+        { month: "Mar", totalUsers: 20000, activeUsers: 5000 },
+        { month: "Apr", totalUsers: 25000, activeUsers: 8000 },
+        { month: "May", totalUsers: 30000, activeUsers: 10000 },
+        { month: "Jun", totalUsers: 35000, activeUsers: 11000 },
+        { month: "Jul", totalUsers: 40000, activeUsers: 11500 },
+        { month: "Aug", totalUsers: 45000, activeUsers: 11800 },
+        { month: "Sep", totalUsers: 50000, activeUsers: 12000 },
+      ]);
+
+      this.get("/revenue-distribution", () => [
+        { source: "Subscriptions", value: 60000 },
+        { source: "Ads", value: 25000 },
+        {source: "Events", value:15000}
+      ]);
+
+      this.get("/top-streamed-songs", () => [
+        { song: "Blinding Lights", streams: 2000 },
+        { song: "Save Your Tears", streams: 1800 },
+        { song: "Levitating", streams: 1600 },
+        { song: "Peaches", streams: 1400 },
+        { song: "Good 4 U", streams: 1300 },
+      ]);
+
+      this.get("/recent-streams", () => [
+        { id: 1, song: "Blinding Lights", artist: "The Weekend", date: "2024-05-01", streams: 200, user: 1001 },
+        { id: 2, song: "Save Your Tears", artist: "The Weekend", date: "2024-05-02", streams: 180, user: 1002 },
+        { id: 3, song: "Levitating", artist: "Dua Lipa", date: "2024-05-03", streams: 160, user: 1003 },
+        { id: 4, song: "Peaches", artist: "Justin Bieber", date: "2024-05-04", streams: 140, user: 1004 },
+        { id: 5, song: "Good 4 U", artist: "Olivia Rodrigo", date: "2024-05-05", streams: 130, user: 1005 },
+      ]);
+
+      this.passthrough((request) => {
+        console.log("Unmatched request:", request.url);
       });
-      this.get("/charts", (schema) => {
-        return schema.charts.all()
-      }
-       )
-    }
+    },
   });
-
-  return server;
 }
