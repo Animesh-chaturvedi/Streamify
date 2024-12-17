@@ -1,8 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import { makeServer } from './mirageServer';
 import Navbar from './Components/NavBar';
 import Cards from './Components/Cards';
 import Charts from './Components/Charts';
+
+makeServer({ environment: process.env.NODE_ENV });
+
+
 
 function App() {
   return (

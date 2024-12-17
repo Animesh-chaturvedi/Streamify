@@ -1,21 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Card from './Card';
 
 function Cards() {
-  const cards = [
-    { title: "Card 1", text: "This is Card One", imageUrl: "https://via.placeholder.com/150" },
-    { title: "Card 2", text: "This is Card Two", imageUrl: "https://via.placeholder.com/150" },
-    { title: "Card 3", text: "This is Card Three", imageUrl: "https://via.placeholder.com/150" },
-    { title: "Card 4", text: "This is Card Four", imageUrl: "https://via.placeholder.com/150" },
-    { title: "Card 5", text: "This is Card Five", imageUrl: "https://via.placeholder.com/150" }
-  ];
+
+  const [cardsData, setCardsData] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/cards")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        setCardsData(data.cards)})
+      .catch(error => console.error('Error fetching users:', error));
+  }, []);
+
+  useEffect(() => {
+    console.log(cardsData,"usersSHere")
+  },[cardsData])
 
   return (
     <div className="container mt-5">
       <div className="row">
-        {cards.map((card, index) => (
+        {cardsData.map((card, index) => (
           <div className="col-sm-12 col-md" key={index}>
-            <Card title={card.title} text={card.text} imageUrl={card.imageUrl} />
+             <Card title={card.name} text={card.value} imageUrl={card.imageUrl} />
           </div>
         ))}
       </div>
