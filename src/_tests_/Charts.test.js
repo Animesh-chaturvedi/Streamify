@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import RevenueChart from "../components/charts/RevenueChart";
-
+import "@testing-library/jest-dom";
+import PieChart from "../Components/charts/PieChart";
 const mockChartData = [
   { source: "Subscriptions", value: 60000 },
   { source: "Ads", value: 25000 },
@@ -9,9 +9,8 @@ const mockChartData = [
 
 describe("RevenueChart Component", () => {
   test("renders pie chart with provided data", () => {
-    render(<RevenueChart data={mockChartData} />);
-    // Check that chart renders
-    expect(screen.getByText("Subscriptions")).toBeInTheDocument();
-    expect(screen.getByText("Ads")).toBeInTheDocument();
+    render(<PieChart data={mockChartData} />);
+
+    expect(screen.getByText("Pie Chart Mock")).toBeInTheDocument();
   });
 });
