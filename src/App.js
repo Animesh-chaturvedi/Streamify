@@ -1,11 +1,11 @@
 import './App.css';
 import { makeServer } from './mirageServer';
 import Navbar from './Components/NavBar';
-import Cards from './Components/Cards';
+import Cards from './Components/Cards/Cards';
 import TabsComponent from './Components/TabbedCharts';
 import { DataProvider } from './Components/context/DataContext';
 import { Row, Col, Container } from "react-bootstrap";
-import StreamTable from './Components/StreamTable';
+import StreamTable from './Components/StreamTable/StreamTable';
 
 
 makeServer({ environment: process.env.NODE_ENV });
@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Container fluid className="my-5">
-      <Row className="align-items-center justify-content-center g-4">
+      <Row className="align-items-center justify-content-center g-4 mt-5">
         <Col xs={12} lg={6} className="d-flex flex-column justify-content-center">
           <Cards/>
         </Col>

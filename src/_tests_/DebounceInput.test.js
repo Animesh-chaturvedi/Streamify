@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import StreamTable from "../Components/StreamTable";
+import StreamTable from "../Components/StreamTable/StreamTable";
 import { DataContext } from "../Components/context/DataContext";
 
 const mockRecentStreams = [

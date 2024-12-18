@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import { Table, Form, InputGroup, Button } from "react-bootstrap";
-import { DataContext } from "./context/DataContext";
-import { debounce } from "../utils";
+import { DataContext } from "../context/DataContext";
+import { debounce } from "../../utils";
+import "./StreamTable.css"
 
 const StreamTable = React.memo(function StreamTable() {
   const {recentStreams} = useContext(DataContext)
@@ -55,7 +56,7 @@ const StreamTable = React.memo(function StreamTable() {
 
   return (
     <div className="transaction-table-container p-4 shadow-sm bg-white rounded">
-      <div className="d-flex justify-content-between align-items-center mb-3">
+      {/* <div className="d-flex justify-content-between align-items-center mb-3">
         <div className="table-heading">
           <h5 className="fw-bold mb-0">Recent Streams</h5>
           <small className="text-muted">Recent streams in the table below.</small>
@@ -73,7 +74,36 @@ const StreamTable = React.memo(function StreamTable() {
             See All
           </Button>
         </div>
-      </div>
+      </div> */}
+      <div className="row align-items-center mb-3 g-3">
+  {/* Table Heading */}
+  <div className="col-12 col-lg-6">
+    <div className="table-heading">
+      <h5 className="fw-bold mb-0 table-title">Recent Streams</h5>
+      <small className="text-muted">Recent streams in the table below.</small>
+    </div>
+  </div>
+
+  {/* Search Input and See All Button */}
+  <div className="col-12 col-lg-6 d-flex flex-column flex-lg-row align-items-center justify-content-lg-end gap-2">
+    <InputGroup size="sm" className="w-100 w-lg-auto">
+      <Form.Control
+        placeholder="Search by Song or Artist"
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
+    </InputGroup>
+    <Button
+      variant="outline-secondary"
+      className="text-nowrap"
+      size="sm"
+      onClick={() => setFilter("")}
+    >
+      See All
+    </Button>
+  </div>
+</div>
+
 
       {/* Table */}
       <Table hover responsive className="mb-0">
