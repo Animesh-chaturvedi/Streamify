@@ -36,7 +36,7 @@ const StreamTable = React.memo(function StreamTable() {
   }, 300)
   const filterData = useCallback(
     (text) => debounceSearch(text),
-    [recentStreams, filter]
+    [recentStreams, filter, debounceSearch]
   );
 
   useEffect(() => {
