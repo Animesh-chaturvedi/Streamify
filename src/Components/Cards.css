@@ -1,0 +1,50 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 1rem; 
+  }
+  
+  .custom-card {
+    flex: 1 1 calc(33.33% - 1rem);
+    min-width: 16rem;
+    max-width: 20rem;
+  }
+  
+  .icon-circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #e9f5ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4895f7;
+    font-size: 1.2rem;
+  }
+  
+  .card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+    white-space: nowrap;
+  }
+  
+  .card-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4895f7;
+    white-space: nowrap;
+  }
+  
+  @media (max-width: 768px) {
+    .custom-card {
+      flex: 1 1 calc(50%); /* Cards take up 50% width on small screens */
+    }
+  }
+
+  @media (max-width: 576px) {
+    .custom-card {
+      flex: 1 1 calc(100% - 1rem); /* 1 card per row for small screens */
+    }
+  }

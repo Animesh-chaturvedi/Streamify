@@ -18,7 +18,6 @@ function generateBlueShades(count) {
 export default function PieChart({ data }) {
   const { shades, hoverShades } = useMemo(() => generateBlueShades(data.length),[data.length]); 
   return (
-
       <Pie
         data={{
           labels: data.map((item) => item.source),

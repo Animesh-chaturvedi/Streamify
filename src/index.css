@@ -4,29 +4,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  .custom-card {
-    border-radius: 10px;
-    padding: 1rem;
-  }
-  
-  .icon-circle {
-    width: 40px;
-    height: 40px;
-    border: 1px solid black;
-    border-radius: 50%;
-    color: #4895F7;
-  }
-  
-  .card-title {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  .card-value {
-    margin: 0;
-  }
 }
 
 code {
@@ -37,7 +14,7 @@ code {
 
 
 .tabs-container {
-  height: 40vh; 
+  /* height: 40vh;  */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,17 +22,8 @@ code {
 
 @media (min-width: 992px) {
   .tabs-container {
-    height: 50vh;
+    min-height: 50vh;
   }
-}
-
-.tab-chart-container {
-  height: 100%; 
-  display: flex;
-  align-items: center; 
-  justify-content: center; 
-  /* padding: 1rem; */
-  box-sizing: border-box;
 }
 
 canvas {
@@ -71,6 +39,7 @@ canvas {
   justify-content: center;
   padding: 1rem;
   box-sizing: border-box;
+  flex-grow: 1;
 }
 
 .tab-chart-container canvas {

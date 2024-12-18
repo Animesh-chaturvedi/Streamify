@@ -3,7 +3,7 @@ import { Table, Form, InputGroup, Button } from "react-bootstrap";
 import { DataContext } from "./context/DataContext";
 import { debounce } from "../utils";
 
-export default function StreamTable() {
+const StreamTable = React.memo(function StreamTable() {
   const {recentStreams} = useContext(DataContext)
   const [filter, setFilter] = useState("");
   const [filteredData, setFilteredData] = useState(recentStreams);
@@ -16,7 +16,6 @@ export default function StreamTable() {
       direction = "desc";
     }
     setSortConfig({ key, direction });
-
     setFilteredData((prevData) =>
       [...prevData].sort((a, b) => {
         if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
@@ -25,6 +24,7 @@ export default function StreamTable() {
       })
     );
   };
+
   const filterData = useCallback(
     debounce((text) => {
       const filtered = recentStreams.filter(
@@ -34,17 +34,27 @@ export default function StreamTable() {
       );
       setFilteredData(filtered);
     }, 300),
-    [recentStreams]
+    [recentStreams, filter]
   );
 
   useEffect(() => {
     filterData(filter);
   }, [filter, filterData]);
 
+  const getSortIndicator = (key) => {
+    if (sortConfig.key === key) {
+      return sortConfig.direction === "asc" ? (
+        <i className="bi bi-chevron-up ms-1"></i>
+      ) : (
+        <i className="bi bi-chevron-down ms-1"></i>
+      );
+    }
+    return <i className="bi bi-chevron-expand ms-1"></i>; // Unsorted state
+  };
+
 
   return (
     <div className="transaction-table-container p-4 shadow-sm bg-white rounded">
-      {/* Table Header Section */}
       <div className="d-flex justify-content-between align-items-center mb-3">
         <div className="table-heading">
           <h5 className="fw-bold mb-0">Recent Streams</h5>
@@ -52,9 +62,6 @@ export default function StreamTable() {
         </div>
         <div className="d-flex align-items-center gap-2">
           <InputGroup size="sm">
-            {/* <InputGroup.Text className="bg-white border-end-0">
-              <i className="bi bi-search text-muted"></i>
-            </InputGroup.Text> */}
             <Form.Control
               placeholder="Search by Song or Artist"
               value={filter}
@@ -73,16 +80,16 @@ export default function StreamTable() {
         <thead className="table-light">
           <tr>
             <th onClick={() => handleSort("song")} style={{ cursor: "pointer" }}>
-              Song Name <i className="bi bi-chevron-down ms-1"></i>
+              Song Name {getSortIndicator("song")}
             </th>
             <th onClick={() => handleSort("artist")} style={{ cursor: "pointer" }}>
-              Artist <i className="bi bi-chevron-down ms-1"></i>
+              Artist {getSortIndicator("artist")}
             </th>
             <th onClick={() => handleSort("date")} style={{ cursor: "pointer" }}>
-              Date Streamed <i className="bi bi-chevron-down ms-1"></i>
+              Date Streamed {getSortIndicator("date")}
             </th>
             <th onClick={() => handleSort("streams")} style={{ cursor: "pointer" }}>
-              Stream Count <i className="bi bi-chevron-down ms-1"></i>
+              Stream Count {getSortIndicator("streams")}
             </th>
             <th>User ID</th>
             <th></th>
@@ -110,4 +117,6 @@ export default function StreamTable() {
       </Table>
     </div>
   );
-}
+})
+
+export default StreamTable;
