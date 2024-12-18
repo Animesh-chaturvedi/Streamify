@@ -50,7 +50,7 @@ const StreamTable = React.memo(function StreamTable() {
 
   useEffect(() => {
     filterData(filter);
-  }, [filter, filterData]);
+  }, [filter]);
 
   const getSortIndicator = (key) => {
     if (sortConfig.key === key) {
