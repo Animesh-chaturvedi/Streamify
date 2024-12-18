@@ -71,3 +71,25 @@ git clone https://github.com/your-username/streamify-dashboard.git
 cd streamify-dashboard
 ```
 
+### **3. Install Dependencies**
+
+```
+npm install
+# or, if you are using yarn
+yarn install
+```
+### **4. Run Application**
+
+```
+npm start
+# or
+yarn start
+```
+### **5. Testing The Application**
+
+```
+npm test
+# or
+yarn test
+```
+
