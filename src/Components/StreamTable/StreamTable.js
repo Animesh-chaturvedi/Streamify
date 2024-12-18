@@ -26,15 +26,16 @@ const StreamTable = React.memo(function StreamTable() {
     );
   };
 
+  const debounceSearch = debounce((text) => {
+    const filtered = recentStreams.filter(
+      (item) =>
+        item.song.toLowerCase().includes(text.toLowerCase()) ||
+        item.artist.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(filtered);
+  }, 300)
   const filterData = useCallback(
-    debounce((text) => {
-      const filtered = recentStreams.filter(
-        (item) =>
-          item.song.toLowerCase().includes(text.toLowerCase()) ||
-          item.artist.toLowerCase().includes(text.toLowerCase())
-      );
-      setFilteredData(filtered);
-    }, 300),
+    (text) => debounceSearch(text),
     [recentStreams, filter]
   );
 
@@ -56,35 +57,13 @@ const StreamTable = React.memo(function StreamTable() {
 
   return (
     <div className="transaction-table-container p-4 shadow-sm bg-white rounded">
-      {/* <div className="d-flex justify-content-between align-items-center mb-3">
-        <div className="table-heading">
-          <h5 className="fw-bold mb-0">Recent Streams</h5>
-          <small className="text-muted">Recent streams in the table below.</small>
-        </div>
-        <div className="d-flex align-items-center gap-2">
-          <InputGroup size="sm">
-            <Form.Control
-              placeholder="Search by Song or Artist"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              // className="border-start-0"
-            />
-          </InputGroup>
-          <Button variant="outline-secondary" className="text-nowrap" size="sm">
-            See All
-          </Button>
-        </div>
-      </div> */}
       <div className="row align-items-center mb-3 g-3">
-  {/* Table Heading */}
-  <div className="col-12 col-lg-6">
-    <div className="table-heading">
-      <h5 className="fw-bold mb-0 table-title">Recent Streams</h5>
-      <small className="text-muted">Recent streams in the table below.</small>
-    </div>
-  </div>
-
-  {/* Search Input and See All Button */}
+       <div className="col-12 col-lg-6">
+         <div className="table-heading">
+          <h5 className="fw-bold mb-0 table-title">Recent Streams</h5>
+         <small className="text-muted">Recent streams in the table below.</small>
+       </div>
+       </div>
   <div className="col-12 col-lg-6 d-flex flex-column flex-lg-row align-items-center justify-content-lg-end gap-2">
     <InputGroup size="sm" className="w-100 w-lg-auto">
       <Form.Control
