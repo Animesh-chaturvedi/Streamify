@@ -61,22 +61,23 @@ const StreamTable = React.memo(function StreamTable() {
       <div className="row align-items-center mb-3 g-3">
         <div className="col-12 col-lg-6">
           <div className="table-heading">
-            <h5 className="fw-bold mb-0 table-title">Recent Streams</h5>
-            <small className="text-muted">Recent streams in the table below.</small>
+            <h3 className="fw-bold mb-0 table-title">Recent Streams</h3>
+            <div className="text-muted">Recent streams in the table below.</div>
           </div>
         </div>
         <div className="col-12 col-lg-6 d-flex flex-column flex-lg-row align-items-center justify-content-lg-end gap-2">
-          <InputGroup size="sm" className="w-100 w-lg-auto">
+          <InputGroup size="md" className="w-100 w-lg-auto py-2">
             <Form.Control
               placeholder="Search by Song or Artist"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
+              className="form-control"
             />
           </InputGroup>
           <Button
             variant="outline-secondary"
             className="text-nowrap"
-            size="sm"
+            size="md"
             onClick={() => setFilter("")}
           >
             See All
@@ -108,10 +109,10 @@ const StreamTable = React.memo(function StreamTable() {
             sortedData.map((item, idx) => (
               <tr key={idx}>
                 <td className="fw-bold text-muted">{item.song}</td>
-                <td className="text-muted">{item.artist}</td>
-                <td className="text-muted">{item.date}</td>
-                <td className="text-muted">{item.streams}</td>
-                <td className="text-muted">{item.user}</td>
+                <td className="text-muted py-3">{item.artist}</td>
+                <td className="text-muted py-3">{item.date}</td>
+                <td className="text-muted py-3">{item.streams}</td>
+                <td className="text-muted py-3">{item.user}</td>
               </tr>
             ))
           ) : (
