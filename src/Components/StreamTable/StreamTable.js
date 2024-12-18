@@ -26,18 +26,27 @@ const StreamTable = React.memo(function StreamTable() {
     );
   };
 
-  const debounceSearch = debounce((text) => {
+  // const debounceSearch = debounce((text) => {
+  //   const filtered = recentStreams.filter(
+  //     (item) =>
+  //       item.song.toLowerCase().includes(text.toLowerCase()) ||
+  //       item.artist.toLowerCase().includes(text.toLowerCase())
+  //   );
+  //   setFilteredData(filtered);
+  // }, 300)
+  // const filterData = useCallback(
+  //   (text) => debounceSearch(text),
+  //   [recentStreams, filter, debounceSearch]
+  // );
+
+  const filterData = debounce((text) => {
     const filtered = recentStreams.filter(
       (item) =>
         item.song.toLowerCase().includes(text.toLowerCase()) ||
         item.artist.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredData(filtered);
-  }, 300)
-  const filterData = useCallback(
-    (text) => debounceSearch(text),
-    [recentStreams, filter, debounceSearch]
-  );
+  }, 300);
 
   useEffect(() => {
     filterData(filter);
